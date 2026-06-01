@@ -21,7 +21,7 @@ function MovieDetails() {
     async function fetchMovie() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=c897eac9f5149eb81fc8ff5a090878b2`,
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
         );
 
         const data = await response.json();
