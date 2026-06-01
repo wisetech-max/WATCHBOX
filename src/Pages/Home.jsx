@@ -1,6 +1,7 @@
+// import MovieCard from "../Components/MovieCard";
+import { useState } from "react";
 import NavBar from "../Components/NavBar";
 import HeroBanner from "../Components/HeroBanner";
-import { useState } from "react";
 import MovieRow from "../Components/MovieRow";
 import SearchResults from "./SearchResults";
 
