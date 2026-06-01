@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { imageURL } from "../Services/Tmdb";
-import { addToWatchlist, isInWatchlist } from "../Services/watchlist";
+import { addToWatchlist, isInWatchlist } from "../Services/Watchlist";
 import Trailer from "../Components/Trailer";
 
 function MovieDetails() {
