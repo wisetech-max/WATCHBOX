@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { tmdbAPI, imageURL } from "../Services/Tmdb";
-import { Link } from "react-router-dom";
+import { tmdbAPI } from "../Services/Tmdb";
 import MovieCard from "../Components/MovieCard";
 
 function MovieRow() {
@@ -26,39 +25,40 @@ function MovieRow() {
     fetchMovies();
   }, []);
 
-  // console.log("API KEY:", import.meta.env.VITE_TMDB_API_KEY);
-
-  const renderMovies = (movies) => {
-    return movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
-  };
-
-  const renderMoviesWithLinks = (movies) => {};
+  const renderMovies = (movies) =>
+    movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
 
   return (
-    <div className="space-y-10 px-4 py-6">
+    <div className="space-y-10 px-3 sm:px-4 md:px-8 lg:px-12 py-6">
       {/* Trending */}
       <section>
-        <h1 className="text-2xl font-bold mb-4 text-white">Trending Movies</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-white">
+          Trending Movies
+        </h1>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto pb-4 scrollbar-hide scroll-smooth">
           {renderMovies(trending)}
         </div>
       </section>
 
       {/* Popular */}
       <section>
-        <h1 className="text-2xl font-bold mb-4 text-white">Popular Movies</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-white">
+          Popular Movies
+        </h1>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto pb-4 scrollbar-hide scroll-smooth">
           {renderMovies(popular)}
         </div>
       </section>
 
       {/* Now Playing */}
       <section>
-        <h1 className="text-2xl font-bold mb-4 text-white">Now Playing</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-white">
+          Now Playing
+        </h1>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-4 sm:gap-5 md:gap-6 overflow-x-auto pb-4 scrollbar-hide scroll-smooth">
           {renderMovies(nowPlaying)}
         </div>
       </section>

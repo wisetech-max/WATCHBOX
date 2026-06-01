@@ -6,6 +6,7 @@ import { useMovies } from "../Hooks/MovieContext";
 function NavBar() {
   const { setMovies, setLoading, loading } = useMovies();
   const [query, setQuery] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -13,12 +14,8 @@ function NavBar() {
 
     try {
       setLoading(true);
-
       const results = await searchMovies(query);
-
       setMovies(results);
-
-      // Navigate after saving results
       navigate("/search");
     } catch (err) {
       console.error(err);
@@ -28,25 +25,41 @@ function NavBar() {
     }
   };
 
+  const navLinks = (
+    <>
+      <Link onClick={() => setMenuOpen(false)} to="/">
+        Home
+      </Link>
+      <Link onClick={() => setMenuOpen(false)} to="/movies">
+        Movies
+      </Link>
+      <Link onClick={() => setMenuOpen(false)} to="/tv">
+        TV Shows
+      </Link>
+      <Link onClick={() => setMenuOpen(false)} to="/anime">
+        Anime
+      </Link>
+      <Link onClick={() => setMenuOpen(false)} to="/watchlist">
+        Watchlist
+      </Link>
+    </>
+  );
+
   return (
     <div className="bg-[#1d232a] shadow-md w-full rounded-xl border border-[#2a323c]">
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-4 md:px-6 py-4">
         {/* Logo */}
         <Link to="/">
-          <h1 className="text-2xl font-bold text-white">WatchBox</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-white">WatchBox</h1>
         </Link>
 
-        {/* Nav Links */}
-        <div className="hidden lg:flex gap-10 text-gray-300 font-medium">
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-          <Link to="/tv">TV Shows</Link>
-          <Link to="/anime">Anime</Link>
-          <Link to="/watchlist">Watchlist</Link>
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex gap-8 text-gray-300 font-medium">
+          {navLinks}
         </div>
 
-        {/* Search */}
-        <div className="flex items-center gap-3">
+        {/* Search (desktop only) */}
+        <div className="hidden md:flex items-center gap-3">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -63,7 +76,41 @@ function NavBar() {
             {loading ? "Searching..." : "Search"}
           </button>
         </div>
+
+        {/* Mobile menu button */}
+        <button
+          className="lg:hidden text-white text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="lg:hidden flex flex-col gap-4 px-6 pb-4 text-gray-300">
+          <div className="flex flex-col gap-3">{navLinks}</div>
+
+          {/* Mobile Search */}
+          <div className="flex flex-col gap-3 mt-3">
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              placeholder="Search movies..."
+              className="bg-[#2a323c] text-white px-4 py-2 rounded-full"
+            />
+
+            <button
+              onClick={handleSearch}
+              disabled={loading}
+              className="bg-indigo-500 text-white px-5 py-2 rounded-full"
+            >
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
