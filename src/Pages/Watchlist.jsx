@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBar from "../Components/NavBar";
 import MovieCard from "../Components/MovieCard";
-import { getWatchlist, removeFromWatchlist } from "../Services/watchlist";
+import { getWatchlist, removeFromWatchlist } from "../Services/Watchlist";
 
 function Watchlist() {
   const [movies, setMovies] = useState(() => getWatchlist());
