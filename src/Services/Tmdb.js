@@ -32,7 +32,12 @@ const fetchMovies = async (endpoint) => {
 };
 
 export const tmdbAPI = {
+  popularTV: () => fetchMovies("/tv/popular"),
   trending: () => fetchMovies("/trending/movie/week"),
+  anime: () =>
+    fetchMovies(
+      "/discover/tv?with_genres=16&with_origin_country=JP&sort_by=popularity.desc",
+    ),
 
   popular: () => fetchMovies("/movie/popular"),
 

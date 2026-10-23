@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import NavBar from "../Components/NavBar";
-import MovieRow from "../Components/MovieRow";
 import MovieCard from "../Components/MovieCard";
 import { tmdbAPI } from "../Services/Tmdb";
 
