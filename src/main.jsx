@@ -12,6 +12,7 @@
 // );
 
 import ReactDOM from "react-dom/client";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { MovieProvider } from "./Hooks/MovieContext";
